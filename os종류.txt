@@ -1,0 +1,17 @@
+os                           윈도우                     리눅스
+
+
+
+
+os계열                 윈도우1개                  1)Debian 계열    -> debian(유료), ubuntu(무료)
+                        	                   2)Redhat 계열    -> redhat(유료), centos(무료)
+
+
+                                                                       
+장비                  마우스                         		         키보드
+                        GUI(그래픽 모드)                      	   TUI  또는 CLI(명령어 모드)
+		Graphical User Interface                (Text User Interface), (Command Line Interface)
+						페이지 만큼              한 줄 씩
+                                                                                                                       
+
+

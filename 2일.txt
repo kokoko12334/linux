@@ -1,0 +1,59 @@
+리눅스
+clear: 위의 모든 명령어를 지운다.
+ifconfig: 네트워크 정보를 보여줌
+
+
+ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 00:0c:29:15:30:eb  txqueuelen 1000  (Ethernet)
+        RX packets 638  bytes 38376 (37.4 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+-> 얘가 NAT
+
+-네트워크설정 방법
+프로그램->시스템도구->설정->네트워크->유선 연결->지금은 자동으로 ip잡힘 그것을 고정으로 잡혀야함
+
+ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.31.135  netmask 255.255.255.0  broadcast 192.168.31.255
+        inet6 fe80::e1ea:ec9c:f8c0:63a7  prefixlen 64  scopeid 0x20<link>
+        ether 00:0c:29:15:30:eb  txqueuelen 1000  (Ethernet)
+        RX packets 727  bytes 45777 (44.7 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 59  bytes 7331 (7.1 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+
+
+
+윈도우
+cls: 위의 모든 명령어를 지운다.
+ipconfig: 네트워크 정보를 보여줌
+
+이더넷 어댑터 VirtualBox Host-Only Network:(공유기의 정보)
+
+   연결별 DNS 접미사. . . . :
+   링크-로컬 IPv6 주소 . . . . : fe80::6175:87d0:6d9:f1b9%3
+   IPv4 주소 . . . . . . . . . : 192.168.56.1
+   서브넷 마스크 . . . . . . . : 255.255.255.0
+   기본 게이트웨이 . . . . . . :
+
+
+이더넷 어댑터 VMware Network Adapter VMnet8:
+
+   연결별 DNS 접미사. . . . :
+   링크-로컬 IPv6 주소 . . . . : fe80::f67a:41ae:e2b6:fbc6%6
+   IPv4 주소 . . . . . . . . . : 192.168.31.1                     ->                3번째 31기억
+   서브넷 마스크 . . . . . . . : 255.255.255.0
+   기본 게이트웨이 . . . . . . :
+
+
+
+
+
+
+
+
+

@@ -80,19 +80,19 @@ useradd 사용시 순차로 생성되는 것들(옵션 생략)
 
 --------------------------------------------------------
 <유의사항>
-# useradd -d /cloud user33		[문제]
+# useradd -d /cloud user33		[문제]=>home디렉터리는 uid랑 맞추는것이 좋음.
 useradd: 경고: 홈디렉터리가 이미 있습니다.
 skel 디렉터리에서 파일을 복사하지 않습니다.
 [결과: 홈디렉터리가 생성 되질 X, 계정은 생성]
 [단, 메일 파일 생성]
 
 
-# useradd -d /linux/user333 user333	[오류]
+# useradd -d /linux/user333 user333	[오류] => 없는 디렉터리(linux)를 언급
 useradd: 디렉터리 /linux/user333을(를) 만들 수 없습니다
 [결과: 홈디렉터리가 생성 되질 X, 계정은 생성]
 [useradd 명령문 중단으로 메일 파일 생성 X]
 
-
+=>또한 중복되는 홈디렉터리 이름이 없어야 함.
 --------------------------------------------------------
 
 1_4)skel[스켈] 생성 -> 자동 생성 디렉터리라고도 부름
@@ -117,19 +117,22 @@ skel이란?
      '/etc/samskel/'에 복사 할 것.
 
 [단, 디렉터리 자체를 복사하지 말 것.]
-[.*은 무슨 일이 있어도 쓰지 말 것] 
+[.*은 무슨 일이 있어도 쓰지 말 것] => ..도 포함(상위폴더)
 
 #mkdir /etc/samskel/
 #cd /etc/skel/
 #cp -r .m* .b* .k* * /etc/samskel/
 
+=>보이는 것만 지시하므로 숨겨진파일은 별도로 다 지정해주어야 함.
 
 
 
 #mv /etc/samskel/sam /etc/samskel/mas
 
+
 #useradd -mk /etc/samskel user5
 #
+
 #tail -8 /etc/passwd
 #passwd user5
 $ls -al

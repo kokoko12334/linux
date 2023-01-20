@@ -1,0 +1,15 @@
+------------------------------
+사용자 총 실습
+------------------------------
+Test)사용자testuser를 조건에 맞게 구현 
+[단, /etc/default/useradd는 사용X] 
+
+USER		: testuser
+UID			: 1500
+GID			: tg
+SHELL		: ksh
+$HOME		: /host/testuser
+SKEL		: /skelsam
+자동 생성될 디렉터리: public_html/
+자동 생성될 파일	: .sam -> 단, 내용은 userid is testuser 라는 내용 입력해서 저장
+------------------------------					

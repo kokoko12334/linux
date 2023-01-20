@@ -196,26 +196,40 @@ usermod [옵션1] [값1] [옵션2] [값2] ... <사용자계정UID>
 #tail -[생성한 갯수만큼] /etc/passwd
 
 # usermod -u 1002 -g user1 -c user2 -s /bin/csh user2
-	
+(uid는 숫자만(중복X), gid는 문자,숫자 둘다 됨.) 마지막오퍼랜드에는 바꿀 계정명 쓰기	
+
 --------------------------------------------------------
 <usermod의 사용자 홈디렉터리 변경법>
 
 #mkdir -p /export/home/  	-> 없는 경로는 반드시 생성!
 1)변경전 확인
 #cat /etc/passwd | grep samadal
+
+
 2)홈디렉터리 정보 변경
 #usermod -d /export/home/samadal samadal	-> 정보 변경 후,
 	1]/etc/passwd 확인!
 	2]#ls -l /home/ /export/home/
+=>실제로 옮기지는 않고 경로만 바꾼 것임 실제로는 mv를 이용하여 이동시켜주어야 함.
+
+
 3)실제 홈디렉터리 옮긴다!
 #mv /home/samadal/ /export/home/	-> 수동 mv로 옮길 것!
 #ls -l /export/home/
 samadal$ 접속
 [항상, 1),2),3) 패턴으로 해줄 것!]
 
+
+
 --------------------------------------------------------
 
-작업2:
+
+<사용자 계정 변경 및 삭제 시 주의!>
+
+
+# usermod -d /export/home/user6 user6
+usermod: user user6 is currently used by process 4711
+=> 해당 계정접속을 중지한다.
 
 
 
@@ -235,17 +249,14 @@ samadal$ 접속
 1)'계정만' 삭제
 #userdel user6
 #
-#tail -12 /etc/passwd   : [user6 삭제], [같이 쓰는 그룹계정 삭제]
-#ls -l /export/home/ /var/spool/mail/ : [user6 존재]
+#tail -12 /etc/passwd   : [user6 삭제], [동일한 그룹계정 삭제]
+#ls -l /export/home/ /var/spool/mail/ : [user6 존재](계정디렉터리, 메일은 존재)
 
 2)'계정과 관련된 것들 모두 삭제'
-#userdel -r user5
-#
+#userdel -r user5 => 디렉터리, 메일 다 삭제
+#단 홈디렉터리가 안맞거나(실제위치, 정보상 위치) 그룹계정 공유가 되고 있는 경우는 제한된 삭제를 함.
 ========================================================================
 작업3:
-
-
-
 
 
 ========================================================================

@@ -1,0 +1,145 @@
+<리눅스 압축 및 풀기 명령>
+
+일반적 압축: 여러 개의 데이터들을 하나로 묶어서 용량을 줄임
+-----------------------------------------------------------------
+
+tar(Tape ARchive)  -> 저장 보관소
+	: 시스템 안에 있는 데이터들을 묶음 형태로 저장
+	즉, 데이터들을 묶어서 보관(파일형식), 압축이 아니라 묶어서 한 파일로 보관
+
+형태: *.tar    => *.tar.gz,  *.tar.bz2
+tar를 하려면 아카이브 생성을 해야한다.
+Archive?(저장소)
+
+tar 문법
+
+1)아카이브 파일 생성
+tar <options> <(Archiving File Name).tar> <Source File(s)>
+     cvf
+2)아카이브 파일 풀기
+tar <options> <(Archiving File Name).tar> : 현재 위치에 풀림(pwd)
+     xvf
+
+
+option들(-기호를 쓰지 X)
+
+c(create) : 데이터들을 묶어서 생성(압축X)
+x(extract): 아카이브파일을 풀어줌
+v(visual) : 아카이브파일을 묶거나 풀 때, 과정을 상세히 보여줌
+	   (verbose: 장황한, 상세한)
+
+f(file)   : 아카이브파일의 이름을 지정(정의)
+
+z	: tar + gzip 및 gunzip  ->  *.tar.gz   옵션(cvfz, xvfz)
+j	: tar + bzip2 및 bunzip2 ->  *.tar.bz2
+J	: tar + xz -> *.tar.xz
+--------------------------------------------------------------------
+
+#pwd
+/export/home/samadal     파일들  (없으면 /backup/에 있는 내용물 복.붙)
+
+3개 묶기(gil.tar)
+# tar cvf gil.tar grub.cfg inittab login.defs
+  (명령어) (옵션) (경로/이름.tar)  (묶을 파일)
+# ls -l
+
+--------------------------------------------------------------------
+리눅스 압축 프로그램들(압축: 용량을 축소시켜서 변환)
+--------------------------------------------------------------------
+1)gzip(GNU : Gnome is Not Unix)
+- 기본 압축 명령
+- 압축 속도율이 높음
+
+2)bzip2
+- 사용형식이 gzip과 거의 동일
+- gzip보다 압축률이 높음
+
+3)xz
+- gzip,bzip2보다 압축률이 더 높음
+- 압축 속도율이 많이 느림(대용량 압축)
+
+압축률: xz > bzip2 > gzip
+압축속도: gzip > bzip2 > xz
+
+4)zip (모든 OS 호환)
+압축 풀기:  unzip [*.zip] (현재 위치에 풀림)
+
+
+--------------------------------------------------------------------
+압축 명령문.
+--------------------------------------------------------------------
+명령어
+1)gzip
+압축:  gzip [파일 이름]  =>  *.gz
+
+해제:  1)gzip -d [압축된 파일 이름.gz]
+	-d: decompress
+      2)gunzip [압축된 파일 이름.gz]
+
+2)bzip2
+압축:  bzip2 [파일 이름]  => *.bz2
+
+해제:  	1)bzip2 -d [압축된 파일 이름.bz2]
+	2)bunzip2 [압축된 파일 이름.bz2]
+-------------------------------------------------------------------
+
+
+1)gzip gil.tar : 압축
+2)rm -rf grub.cfg inittab login.defs 후
+압축 해제 후, 아카이빙 파일 풀기
+# gunzip gil.tar.gz
+# tar xvf gil.tar
+
+예제 ->  bzip2로 gil.tar 압축 후, 풀기
+
+--------------------------------------------------------------------
+
+경로 다른 대상에서 tar + 압축 및 풀기
+# cd /backup/
+
+# tar cvfz /export/home/samadal/gilg.tar.gz *
+# tar cvfj gilb.tar.bz2 *
+# ls -l /backup/ /export/home/samadal/
+
+
+gilb.tar.bz2 및 gilg.tar.gz은 백업에 풀기
+사전작업(grub,inittab,login.defs들만 제거 후)
+
+# cd /backup/
+# tar xvfj gilb.tar.bz2
+
+# cd /export/home/samadal/
+# tar xvfz ./gilg.tar.gz
+------------------------------------------------------------------------------
+
+경로까지 포함해서 tar + 압축
+
+# cd /backup/
+# tar cvfz gil.tar.gz /export/home/samadal/* => 경로 쓴만큼 되어서 압축되어서
+=> 압축을 풀면 export폴더가 생김.
+# tar xvfz gil.tar.gz
+# ls -lR ./export/
+------------------------------------------------------------------
+실습
+사전 작업	: cp -pr /bin/ /backup/     -> /backup/bin/을 압축이용할것.
+조건	  tar + 압축
+
+대상	: 	1)/backup/bin/*에 들어있는 모든 파일들
+	  		2)경로 포함해서 /backup/bin/파일들
+압축파일저장될 장소: /home/
+아카이빙 파일 이름: 
+	  1)binlistg.tar.gz
+		cd /backup/bin/
+		tar cvfz /home/binlistg.tar.gz ./*
+
+	2)binlistb.tar.bz2
+		cd /home/
+		tar cvfj binlistb.tar.bz2 /backup/bin/*
+
+
+
+<용량 확인>
+[압축 풀어서 확인시 "임의의 디렉터리 생성 후, 그 안에서 풀어볼 것"]
+cd /압축 풀 경로
+tar xvfz /home/binlistg.tar.gz
+tar xvfj /home/binlistb.tar.bz2

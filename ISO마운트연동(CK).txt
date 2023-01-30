@@ -1,0 +1,7 @@
+ISO 마운트 연동
+
+1)cdrom (ISO)삽입(전원 off)
+2)#mount /dev/sr0 /mnt/		[단, 수동적임으로 재부팅시 다시 마운트]
+3)# df -h			[연동 확인]
+4)#cd /mnt/Packages/
+5)# ls 패키지명*x86* 패키지명*noarch* | nl
